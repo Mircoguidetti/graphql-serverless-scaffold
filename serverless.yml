@@ -1,0 +1,56 @@
+service: graphql-serverless-scaffold
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'local'}
+  region: ${opt:region, 'eu-west-1'}
+  timeout: 30
+  
+plugins:
+  - serverless-offline
+  - serverless-prune-plugin
+  - serverless-plugin-typescript
+
+custom:
+  prune:
+    automatic: true
+    number: 3
+
+package:
+  individually: true
+  exclude:
+    - .git/**
+    - tmp/**
+
+functions:
+  search:
+    # this is formatted as <FILENAME>.<HANDLER>
+    handler: src/functions/search.handler
+    events:
+      - http:
+          path: search
+          method: post
+          cors: true
+      - http:
+          path: search
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    AWSLambdaVPCAccessExecutionRole:
+      Type: AWS::IAM::ManagedPolicy
+      Properties:
+        Description: Lambda policy for vpc execution.
+        Roles:
+          - { 'Ref': 'IamRoleLambdaExecution' }
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - ec2:CreateNetworkInterface
+                - ec2:DescribeNetworkInterfaces
+                - ec2:DeleteNetworkInterface
+              Resource: '*'
