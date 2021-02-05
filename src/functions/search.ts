@@ -1,4 +1,4 @@
-import server from  '../services/search-service'
+import server from '../services/search'
 
 exports.handler = server.createHandler({
   cors: { origin: '*' },

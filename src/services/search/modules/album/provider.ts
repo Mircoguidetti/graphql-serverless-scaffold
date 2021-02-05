@@ -1,7 +1,7 @@
 import { AlbumInterface } from './interface'
 
-class Album {
-  static async album():Promise<AlbumInterface> {
+export class AlbumProvider {
+  static album(): AlbumInterface {
     return {
       "title": "The Dark Side of the Moon.",
       "date": "March 1st, 1973",
@@ -9,5 +9,3 @@ class Album {
     }
   }
 }
-
-export default Album

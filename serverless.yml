@@ -13,6 +13,8 @@ plugins:
   - serverless-plugin-typescript
 
 custom:
+  serverless-offline:
+    useChildProcesses: true
   prune:
     automatic: true
     number: 3
@@ -26,7 +28,8 @@ functions:
           path: search
           method: post
           cors: true
+
       - http:
           path: search
           method: get
-          cors: true.
+          cors: true

@@ -1,6 +1,9 @@
 import { gql } from 'apollo-server-lambda'
+import { resolvers } from './resolvers'
 
-export default gql`
+export const albumModule = {
+  resolvers,
+  typeDefs: gql`
   type Album {
     id: Int
     title: String
@@ -10,4 +13,5 @@ export default gql`
   extend type Query {
     album: Album
   } 
-`
+  `,
+}   
