@@ -4,14 +4,14 @@ import { resolvers } from './resolvers'
 export const albumModule = {
   resolvers,
   typeDefs: gql`
-  type Album {
-    id: Int
-    title: String
-    date: String
-    artist: String
-  }
-  extend type Query {
-    album: Album
-  } 
+    type Album {
+      id: Int
+      title: String
+      date: String
+      artist: String
+    }
+    extend type Query {
+      album: Album
+    }
   `,
-}   
+}
